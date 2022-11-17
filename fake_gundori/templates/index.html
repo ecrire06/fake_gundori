@@ -4,4 +4,19 @@
   <h1>Fake Gundori Home</h1>
   <p>Day counting app for military services.</p>
   <li><a href="{% url 'index' %}">Home</a></li>
+
+  <h1>Soldiers</h1>
+  <table border="1">
+    {% for s in soldiers %}
+    <tr>
+      <td>{{s.name}}</td>
+      <td>{{s.enter_date}}</td>
+      <td>{{s.army_choice}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <p>
+    <a href='add/'>Add Soldier</a>
+  </p>
 {% endblock %}

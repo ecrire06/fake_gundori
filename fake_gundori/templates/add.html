@@ -1,0 +1,15 @@
+<h1> 군인 추가하기 </h1>
+
+<form action="addrecord/" method="post">
+{% csrf_token %}
+이름:<br>
+<input name="name">
+<br><br>
+입대일:<br>
+<input name="enter_date">
+<br><br>
+복무 종류:<br>
+<input name="army_choice">
+<br><br>
+<input type="submit" value="Submit">
+</form>

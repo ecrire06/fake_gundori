@@ -1,9 +1,5 @@
-# https://docs.djangoproject.com/en/4.1/topics/http/shortcuts/
-# render(request, template_name, context=None, content_type=None, status=None, using=None)
-
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse
+from django.shortcuts import render, redirect
+from .forms import SoldierForm
 from .models import Soldier
 
 
@@ -14,13 +10,15 @@ def index(request):
     }
     return render(request, 'index.html', content)
 
-def add(request):
-    return render(request, 'add.html')
-
-def addrecord(request):
-    name = request.POST['name']
-    enter_date = request.POST['enter_date']
-    army_choice = request.POST['army_choice']
-    soldier = Soldier(name=name, enter_date=enter_date, army_choice=army_choice)
-    soldier.save()
-    return HttpResponseRedirect(reverse('index'))
+def addsoldier(request):
+    if request.method == "POST":
+        form = SoldierForm(request.POST)
+        if form.is_valid():
+            soldier = form.save(commit=False)
+            soldier.save()
+            return redirect('index')
+        else:
+            return redirect('index')
+    if request.method == "GET":
+        form = SoldierForm()
+        return render(request, 'new.html', {'form': form})

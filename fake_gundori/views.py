@@ -19,6 +19,22 @@ def addsoldier(request):
             return redirect('index')
         else:
             return redirect('index')
-    if request.method == "GET":
+    else: # request.method == "GET"
         form = SoldierForm()
         return render(request, 'new.html', {'form': form})
+
+def delete(request, id):
+    soldier = Soldier.objects.get(id=id)
+    soldier.delete()
+    return redirect('index')
+
+def update(request, id):
+    soldier = Soldier.objects.get(id=id)
+    if request.method == "POST":
+        form = SoldierForm(request.POST, instance=soldier)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = SoldierForm(instance=soldier)
+    return render(request, 'update.html', {'form' : form})

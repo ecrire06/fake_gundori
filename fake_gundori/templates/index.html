@@ -1,17 +1,19 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Fake Gundori Home</h1>
+  <h1>짭 군돌이</h1>
   <p>Day counting app for military services.</p>
   <li><a href="{% url 'index' %}">Home</a></li>
 
-  <h1>Soldiers</h1>
+  <h1>용사 목록</h1>
   <table border="1">
     {% for s in soldiers %}
     <tr>
-      <td>{{s.name}}</td>
-      <td>{{s.enter_date}}</td>
-      <td>{{s.army_choice}}</td>
+      <td>{{ s.name }}</td>
+      <td>{{ s.enter_date }}</td>
+      <td>{{ s.army_choice }}</td>
+      <td><a href="delete/{{ s.id }}">삭제</a></td>
+      <td><a href="update/{{ s.id }}">수정</a></td>      
     </tr>
     {% endfor %}
   </table>

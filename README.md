@@ -35,3 +35,4 @@ run `python3` as you use python 3.x version
 ## Localhost.run
 
 `ssh -R 80:localhost:[port-number] localhost.run`
+`ssh -R 80:localhost:8000 localhost.run`

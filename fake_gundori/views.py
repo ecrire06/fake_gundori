@@ -4,7 +4,7 @@ from .models import Soldier
 
 
 def index(request):
-    soldiers = Soldier.objects.all().values()
+    soldiers = Soldier.objects.all()
     content = {
         'soldiers': soldiers,
     }

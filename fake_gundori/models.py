@@ -13,3 +13,17 @@ class Soldier(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def end_date(self):
+        from datetime import datetime
+        from dateutil.relativedelta import relativedelta
+        enter_date = self.enter_date
+        army_choice = self.army_choice
+        if army_choice == "army":
+            end_date = enter_date + relativedelta(months=18) + relativedelta(days=-1)
+        if army_choice == "navy":
+            end_date = enter_date + relativedelta(months=20) + relativedelta(days=-1)
+        if army_choice == "air":
+            end_date = enter_date + relativedelta(months=21) + relativedelta(days=-1)
+        return end_date

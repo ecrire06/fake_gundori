@@ -15,6 +15,7 @@ class Soldier(models.Model):
     name = models.CharField(max_length=30)
     enter_date = models.DateTimeField()
     army_choice = models.CharField(choices=ARMY_CHOICE, max_length=30, null=True)
+    bio = models.CharField(max_length=200, null=True, blank=True, default="한줄소개")
 
     def __str__(self):
         return self.name

@@ -8,7 +8,7 @@ class DateInput(forms.DateInput):
 class SoldierForm(ModelForm):
     class Meta:
         model = Soldier
-        fields = ['name', 'enter_date', 'army_choice']
+        fields = ['name', 'enter_date', 'army_choice', 'bio']
         widgets = {
             'enter_date' : DateInput(),
         }

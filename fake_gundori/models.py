@@ -40,7 +40,9 @@ class Soldier(models.Model):
     def remain_days(self):
         end_date = self.end_date
         remain_days = (end_date - timezone.now()).days
-        return remain_days    
+        if remain_days < 0:
+            remain_days = 0
+        return remain_days
     
     # 총 복무일수
     @property
@@ -61,4 +63,4 @@ class Soldier(models.Model):
             percent = 100
         if percent < 0:
             percent = 0
-        return round(percent, 8)
+        return "{0} %".format(round(percent, 8))

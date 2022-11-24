@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
+from django.views import generic
 from .forms import SoldierForm
 from .models import Soldier
 
 
 def index(request):
-    soldiers = Soldier.objects.all()
+    soldiers = Soldier.objects.all().order_by('enter_date')
     content = {
         'soldiers': soldiers,
     }

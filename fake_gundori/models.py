@@ -12,7 +12,8 @@ AIR = 'air'
 ARMY_CHOICE = ((ARMY, '육군'), (NAVY, '해군'), (AIR, '공군'))
 
 class Soldier(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=100)
+    password = models.CharField(max_length=100, default="password")
     enter_date = models.DateTimeField()
     army_choice = models.CharField(choices=ARMY_CHOICE, max_length=30, null=True)
     bio = models.CharField(max_length=200, null=True, blank=True, default="한줄소개")

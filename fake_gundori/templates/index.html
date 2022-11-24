@@ -7,6 +7,19 @@
 
   <h1>용사 목록</h1>
   <table border="1">
+    <tr>
+      <td>name</td>
+      <td>enter_date</td>
+      <td>army_choice</td>
+      <td>end_date</td>
+      <td>remain_days</td>
+      <td>bio</td>
+      <td>password</td>
+      <td>total_days</td>
+      <td>percent</td>
+      <td>삭제</td>
+      <td>수정</td>
+    </tr>
     {% for s in soldiers %}
     <tr>
       <td>{{ s.name }}</td>
@@ -16,6 +29,8 @@
       <td>{{ s.remain_days }}</td>
       <td>{{ s.bio }}</td>
       <td>{{ s.password }}</td>
+      <td>{{ s.total_days }}</td>
+      <td>{{ s.percent }}</td>
       <td><a href="delete/{{ s.id }}">삭제</a></td>
       <td><a href="update/{{ s.id }}">수정</a></td>      
     </tr>

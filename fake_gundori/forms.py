@@ -5,6 +5,7 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 class SoldierForm(forms.ModelForm):
+    confirm_password = forms.CharField(widget=forms.PasswordInput())
     class Meta:
         model = Soldier
         fields = [
@@ -18,3 +19,13 @@ class SoldierForm(forms.ModelForm):
             'enter_date' : DateInput(),
             'password' : forms.PasswordInput(),
         }
+
+    def clean(self):
+        cleaned_data = super(SoldierForm, self).clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password != confirm_password:
+            raise forms.ValidationError(
+                "비밀번호와 불일치합니다."
+            )

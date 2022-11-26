@@ -5,9 +5,9 @@ from .views import SoldierListView, SoldierCreateView, SoldierDetailView, Soldie
 urlpatterns = [
     path('soldier/list', views.SoldierListView.as_view(), name='soldier-list'),
     path('soldier/add', views.SoldierCreateView.as_view(), name='soldier-add'),
-    path('soldier/detail/<int:pk>/', views.SoldierDetailView.as_view(), name='soldier_detail'),
-    path('soldier/update/<int:pk>/', views.SoldierUpdateView.as_view(), name='soldier_update'),
-    path('soldier/delete/<int:pk>/', views.SoldierDeleteView.as_view(), name='soldier-delete'),
+    path('soldier/<int:pk>', views.SoldierDetailView.as_view(), name='soldier_detail'),
+    path('soldier/<int:pk>/update/', views.SoldierUpdateView.as_view(), name='soldier_update'),
+    path('soldier/<int:pk>/delete/', views.SoldierDeleteView.as_view(), name='soldier-delete'),
 
     path('', views.index, name="index"),
     path('addsoldier/', views.addsoldier, name="addsoldier"),

@@ -27,10 +27,10 @@
         <td>{{ soldier.total_days }}</td>
         <td>{{ soldier.percent }}</td>
         <td>
-            <a href="delete/{{ soldier.id }}">삭제</a>
+            <a href="{{ soldier.id }}/delete">삭제</a>
         </td>
         <td>
-            <a href="update/{{ soldier.id }}">수정</a>
+            <a href="{{ soldier.id }}/update">수정</a>
         </td>
     </tr>
 </table>

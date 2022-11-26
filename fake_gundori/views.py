@@ -9,15 +9,15 @@ from .models import Soldier
 class SoldierListView(generic.ListView):
     context_object_name = 'soldier_list'
     template_name = 'soldier_list.html'
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         return Soldier.objects.all().order_by('enter_date')
 
 class SoldierCreateView(generic.CreateView):
     form_class = SoldierForm
-    success_url = 'list'
     template_name = 'soldier_form.html'
+    success_url = reverse_lazy('soldier-list')
 
 class SoldierDetailView(generic.DetailView):
     model = Soldier
@@ -25,14 +25,13 @@ class SoldierDetailView(generic.DetailView):
 
 class SoldierUpdateView(generic.UpdateView):
     model = Soldier
+    form_class = SoldierForm
     template_name = 'soldier_update.html'
-    form_class = 'SoldierForm'
-
-    def form_valid(self, form):
-        return super().form_valid(form)
+    success_url = reverse_lazy('soldier-list')
 
 class SoldierDeleteView(generic.DeleteView):
     model = Soldier
+    template_name = 'soldier_delete.html'
     success_url = reverse_lazy('soldier-list')
 
 def index(request):

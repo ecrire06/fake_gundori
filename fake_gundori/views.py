@@ -39,3 +39,10 @@ def update(request, id):
     else:
         form = SoldierForm(instance=soldier)
     return render(request, 'update.html', {'form' : form})
+
+def detail(request, id):
+    soldier = Soldier.objects.get(id=id)
+    content = {
+        'soldier': soldier,
+    }
+    return render(request, 'detail.html', content)

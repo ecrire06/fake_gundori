@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div>
+    <div>
+        <h2>이름: {{ soldier.name }}</h2>
+        <p>입대: {{ soldier.enter_date }}</p>
+        <p>전역: {{ soldier.end_date }}</p>
+    </div>
+    <div>
+        <p>D-Day: {{ soldier.remain_days }}</p>
+        <p>Percent: {{ soldier.percent }}</p>
+    </div>
+    <div>
+        <p>전체 복무일: {{ soldier.total_days }}</p>
+        <p>남은 복무일: {{ soldier.remain_days }}</p>
+    </div>
+</div>
+<div>
+    <li><a href="{% url 'index' %}">Home</a></li>
+</div>
+{% endblock %}

@@ -36,3 +36,8 @@ run `python3` as you use python 3.x version
 
 `ssh -R 80:localhost:[port-number] localhost.run`
 `ssh -R 80:localhost:8000 localhost.run`
+
+# Requirements
+
+`pip freeze > requirements.txt`
+`pip install -r requirements.txt`

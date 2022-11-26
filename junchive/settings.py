@@ -27,11 +27,11 @@ SECRET_KEY = 'django-insecure-k!+6$!-&u&wvu3dlo1#-h_)$3r^a(bo^u1zq2b20z5^pxa85xm
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'ca0e2a175a0a47.lhr.life',
+    '19b4445f78b8f7.lhr.life',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://ca0e2a175a0a47.lhr.life',
+    'https://19b4445f78b8f7.lhr.life',
 ]
 
 # Application definition

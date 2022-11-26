@@ -2,12 +2,17 @@
 <html lang="en">
 {% load static %}
 <link rel="stylesheet" href="{% static 'styles.css' %}">
+
 <head>
-  {% block title %}<title>Local Library</title>{% endblock %}
+    {% block title %}<title>Local Library</title>{% endblock %}
 </head>
+
 <body>
-  {% block sidebar %}<!-- insert default navigation text for every page -->{% endblock %}
-  {% block content %}<!-- default content text (typically empty) -->{% endblock %}
-  {% include 'footer.html' %} 
+    {% block sidebar %}
+    <!-- insert default navigation text for every page -->{% endblock %}
+    {% block content %}
+    <!-- default content text (typically empty) -->{% endblock %}
+    {% include 'footer.html' %}
 </body>
+
 </html>

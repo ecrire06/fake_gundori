@@ -1,20 +1,85 @@
 {% extends "base_generic.html" %}
-
 {% block content %}
-    <h2>짭 군돌이</h2>
-    <h3>군인 목록</h3>
-    {% if soldier_list %}
-    <table border="1">
-        <tr>
-            <td>이름</td>
-        </tr>
-        {% for s in soldier_list %}
-            <tr>
-                <td><a href="{{ s.get_absolute.html }}">{{ s.name }}</a></td>
-            </tr>    
-        {% endfor %}
-    </table>
+<h2>짭 군돌이</h2>
+<h3>군인 목록</h3>
+{% if soldier_list %}
+<table border="1">
+    <tr>
+        <td>이름</td>
+        <td>입대일</td>
+        <td>병역 종류</td>
+        <td>전역일</td>
+        <td>남은 복무기간</td>
+        <td>한줄소개</td>
+        <td>비밀번호</td>
+        <td>총 복무기간</td>
+        <td>퍼센트</td>
+        <td>삭제</td>
+        <td>수정</td>
+    </tr>
+    {% for soldier in soldier_list %}
+    <tr>
+        <td>
+            <a href="{{ soldier.get_absolute_url }}">{{ soldier.name }}</a>
+        </td>
+        <td>{{ soldier.enter_date }}</td>
+        <td>{{ soldier.army_choice }}</td>
+        <td>{{ soldier.end_date }}</td>
+        <td>{{ soldier.remain_days }}</td>
+        <td>{{ soldier.bio }}</td>
+        <td>{{ soldier.password }}</td>
+        <td>{{ soldier.total_days }}</td>
+        <td>{{ soldier.percent }}</td>
+        <td>
+            <a href="delete/{{ soldier.id }}">삭제</a>
+        </td>
+        <td>
+            <a href="update/{{ soldier.id }}">수정</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>군인을 추가해주세요.</p>
+{% endif %}
+<div>
+    <a href="add">군인 추가하기</a>
+</div>
+
+<!-- bootstrap style을 적용한다. -->
+{% if is_paginated %}
+<ul class="pagination">
+    {% if page_obj.has_previous %}
+    <li>
+        <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+    </li>
     {% else %}
-        <p>군인을 추가해주세요.</p>
+    <li class="disabled">
+        <span>&laquo;</span>
+    </li>
     {% endif %}
+    {% for i in paginator.page_range %}
+    {% if page_obj.number == i %}
+    <li class="active">
+        <span>{{ i }}
+            <span class="sr-only">(current)</span>
+        </span>
+    </li>
+    {% else %}
+    <li>
+        <a href="?page={{ i }}">{{ i }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+    <li>
+        <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+    </li>
+    {% else %}
+    <li class="disabled">
+        <span>&raquo;</span>
+    </li>
+    {% endif %}
+</ul>
+{% endif %}
 {% endblock %}

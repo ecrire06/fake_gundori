@@ -2,6 +2,39 @@
 
 {% block content %}
 
-    <h2>{{ soldier.name }}</h2>
+<table border="1">
+    <tr>
+        <td>이름</td>
+        <td>입대일</td>
+        <td>병역 종류</td>
+        <td>전역일</td>
+        <td>남은 복무기간</td>
+        <td>한줄소개</td>
+        <td>비밀번호</td>
+        <td>총 복무기간</td>
+        <td>퍼센트</td>
+        <td>삭제</td>
+        <td>수정</td>
+    </tr>
+    <tr>
+        <td>{{ soldier.name }}</td>
+        <td>{{ soldier.enter_date }}</td>
+        <td>{{ soldier.army_choice }}</td>
+        <td>{{ soldier.end_date }}</td>
+        <td>{{ soldier.remain_days }}</td>
+        <td>{{ soldier.bio }}</td>
+        <td>{{ soldier.password }}</td>
+        <td>{{ soldier.total_days }}</td>
+        <td>{{ soldier.percent }}</td>
+        <td>
+            <a href="delete/{{ soldier.id }}">삭제</a>
+        </td>
+        <td>
+            <a href="update/{{ soldier.id }}">수정</a>
+        </td>
+    </tr>
+</table>
+<div>
+    <a href="{% url 'soldier-list' %}">목록으로</a>
 
-{% endblock %}
+    {% endblock %}

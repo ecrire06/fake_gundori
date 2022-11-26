@@ -1,18 +1,39 @@
-from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from .forms import SoldierForm
 from .models import Soldier
 
+# CRUD with Django built-in class-based generic views
 
 class SoldierListView(generic.ListView):
-    template_name = 'soldier_list.html'
     context_object_name = 'soldier_list'
+    template_name = 'soldier_list.html'
+    paginate_by = 5
 
     def get_queryset(self):
         return Soldier.objects.all().order_by('enter_date')
 
+class SoldierCreateView(generic.CreateView):
+    form_class = SoldierForm
+    success_url = 'list'
+    template_name = 'soldier_form.html'
+
 class SoldierDetailView(generic.DetailView):
     model = Soldier
+    template_name = 'soldier_detail.html'
+
+class SoldierUpdateView(generic.UpdateView):
+    model = Soldier
+    template_name = 'soldier_update.html'
+    form_class = 'SoldierForm'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class SoldierDeleteView(generic.DeleteView):
+    model = Soldier
+    success_url = reverse_lazy('soldier-list')
 
 def index(request):
     soldiers = Soldier.objects.all().order_by('enter_date')

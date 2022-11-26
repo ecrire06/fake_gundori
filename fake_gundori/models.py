@@ -1,5 +1,6 @@
 # django model 관련
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 # date 관련
@@ -21,6 +22,9 @@ class Soldier(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('soldier_detail', kwargs={'pk': self.pk})
 
     # 전역일
     @property

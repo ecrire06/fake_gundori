@@ -4,6 +4,16 @@ from .forms import SoldierForm
 from .models import Soldier
 
 
+class SoldierListView(generic.ListView):
+    template_name = 'soldier_list.html'
+    context_object_name = 'soldier_list'
+
+    def get_queryset(self):
+        return Soldier.objects.all().order_by('enter_date')
+
+class SoldierDetailView(generic.DetailView):
+    model = Soldier
+
 def index(request):
     soldiers = Soldier.objects.all().order_by('enter_date')
     content = {

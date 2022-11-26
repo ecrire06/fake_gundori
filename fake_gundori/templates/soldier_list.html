@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h2>짭 군돌이</h2>
+    <h3>군인 목록</h3>
+    {% if soldier_list %}
+    <table border="1">
+        <tr>
+            <td>이름</td>
+        </tr>
+        {% for s in soldier_list %}
+            <tr>
+                <td><a href="{{ s.get_absolute.html }}">{{ s.name }}</a></td>
+            </tr>    
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>군인을 추가해주세요.</p>
+    {% endif %}
+{% endblock %}

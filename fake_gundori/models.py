@@ -8,10 +8,12 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import time
 
-ARMY = 'army'
-NAVY = 'navy'
-AIR = 'air'
-ARMY_CHOICE = ((ARMY, '육군'), (NAVY, '해군'), (AIR, '공군'), ('공익', '공익'))
+ARMY = '육군'
+NAVY = '해군'
+AIR = '공군'
+MARINE = '해병대'
+PUBLIC = '공익'
+ARMY_CHOICE = ((ARMY, '육군'), (NAVY, '해군'), (AIR, '공군'), (MARINE, '해병대'), (PUBLIC, '공익'))
 
 class Soldier(models.Model):
     name = models.CharField(max_length=20)
@@ -31,14 +33,16 @@ class Soldier(models.Model):
     def end_date(self):
         enter_date = self.enter_date
         army_choice = self.army_choice
-        if army_choice == "army":
+        if army_choice == "육군":
             end_date = enter_date + relativedelta(months=18) + relativedelta(days=-1)
-        if army_choice == "navy":
+        if army_choice == "해군":
             end_date = enter_date + relativedelta(months=20) + relativedelta(days=-1)
-        if army_choice == "air":
+        if army_choice == "공군":
             end_date = enter_date + relativedelta(months=21) + relativedelta(days=-1)
         if army_choice == "공익":
             end_date = enter_date + relativedelta(months=21) + relativedelta(days=-1)
+        if army_choice == "해병대":
+            end_date = enter_date + relativedelta(months=18) + relativedelta(days=-1)
         return end_date
 
     # 남은 복무일수

@@ -12,7 +12,6 @@
         <td>전역일</td>
         <td>남은 복무기간</td>
         <td>한줄소개</td>
-        <td>비밀번호</td>
         <td>총 복무기간</td>
     </tr>
     {% for soldier in soldier_list %}
@@ -20,13 +19,12 @@
         <td>
             <a href="{{ soldier.get_absolute_url }}">{{ soldier.name }}</a>
         </td>
-        <td>{{ soldier.percent }}</td>
+        <td>{{ soldier.percent }} %</td>
         <td>{{ soldier.enter_date|date:"Y-m-d" }}</td>
         <td>{{ soldier.army_choice }}</td>
         <td>{{ soldier.end_date|date:"Y-m-d" }}</td>
         <td>{{ soldier.remain_days }}</td>
         <td>{{ soldier.bio }}</td>
-        <td>{{ soldier.password }}</td>
         <td>{{ soldier.total_days }}</td>
     </tr>
     {% endfor %}

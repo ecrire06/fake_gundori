@@ -28,10 +28,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'd1a1edda83c844.lhr.life',
+    'ecrire06.up.railway.app',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://d1a1edda83c844.lhr.life',
+    'https://ecrire06.up.railway.app',
 ]
 
 # Application definition

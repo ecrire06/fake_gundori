@@ -11,7 +11,7 @@ import time
 ARMY = 'army'
 NAVY = 'navy'
 AIR = 'air'
-ARMY_CHOICE = ((ARMY, '육군'), (NAVY, '해군'), (AIR, '공군'))
+ARMY_CHOICE = ((ARMY, '육군'), (NAVY, '해군'), (AIR, '공군'), ('공익', '공익'))
 
 class Soldier(models.Model):
     name = models.CharField(max_length=20)
@@ -36,6 +36,8 @@ class Soldier(models.Model):
         if army_choice == "navy":
             end_date = enter_date + relativedelta(months=20) + relativedelta(days=-1)
         if army_choice == "air":
+            end_date = enter_date + relativedelta(months=21) + relativedelta(days=-1)
+        if army_choice == "공익":
             end_date = enter_date + relativedelta(months=21) + relativedelta(days=-1)
         return end_date
 

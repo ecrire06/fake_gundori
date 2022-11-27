@@ -13,7 +13,6 @@
         <td>한줄소개</td>
         <td>비밀번호</td>
         <td>총 복무기간</td>
-        <td>퍼센트</td>
         <td>삭제</td>
         <td>수정</td>
     </tr>
@@ -22,14 +21,13 @@
         <td>
             <a href="{{ soldier.get_absolute_url }}">{{ soldier.name }}</a>
         </td>
-        <td>{{ soldier.enter_date }}</td>
+        <td>{{ soldier.enter_date|date:"Y-m-d" }}</td>
         <td>{{ soldier.army_choice }}</td>
-        <td>{{ soldier.end_date }}</td>
+        <td>{{ soldier.end_date|date:"Y-m-d" }}</td>
         <td>{{ soldier.remain_days }}</td>
         <td>{{ soldier.bio }}</td>
         <td>{{ soldier.password }}</td>
         <td>{{ soldier.total_days }}</td>
-        <td>{{ soldier.percent }}</td>
         <td>
             <a href="{{ soldier.id }}/delete">삭제</a>
         </td>

@@ -13,22 +13,19 @@
         <td>비밀번호</td>
         <td>총 복무기간</td>
         <td>퍼센트</td>
-        <td>pyscript</td>
         <td>삭제</td>
         <td>수정</td>
     </tr>
     <tr>
         <td>{{ soldier.name }}</td>
-        <td>{{ soldier.enter_date|date:"d-m-Y" }}</td>
+        <td>{{ soldier.enter_date|date:"Y-m-d" }}</td>
         <td>{{ soldier.army_choice }}</td>
         <td>{{ soldier.end_date }}</td>
         <td>{{ soldier.remain_days }}</td>
         <td>{{ soldier.bio }}</td>
         <td>{{ soldier.password }}</td>
         <td>{{ soldier.total_days }}</td>
-        <td>{{ soldier.percent }} %</td>
-        <td id="output">
-        </td>
+        <td id="output"></td>
         <td>
             <a href="{{ soldier.id }}/delete">삭제</a>
         </td>
@@ -46,14 +43,18 @@
 
     async def show_percent():
         while True:
-            await asyncio.sleep(1)
-            enter_date = "{{ soldier.enter_date }}"
-            enter_date_obj = datetime.strptime(enter_date, "%B %d, %Y, midnight")
-            end_date = "{{ soldier.end_date }}"
-
-            serve_timedelta = (datetime.now() - enter_date_obj)
+            await asyncio.sleep(0.01)
+            enter_date = "{{ soldier.enter_date|date:"Y-m-d" }}"
+            enter_date_obj = datetime.strptime(enter_date, "%Y-%m-%d")
+            end_date = "{{ soldier.end_date|date:"Y-m-d" }}"
+            end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
             
-            Element("output").write(serve_timedelta)
+            serve_timedelta = (datetime.now() - enter_date_obj)
+            total_timedelta = (end_date_obj - enter_date_obj)
+
+            percent = serve_timedelta.total_seconds() / total_timedelta.total_seconds() * 100
+
+            Element("output").write("{0} %".format(round(percent, 7)))
 
     pyscript.run_until_complete(show_percent())
     </py-script>

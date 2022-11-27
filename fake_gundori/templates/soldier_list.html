@@ -13,8 +13,6 @@
         <td>한줄소개</td>
         <td>비밀번호</td>
         <td>총 복무기간</td>
-        <td>삭제</td>
-        <td>수정</td>
     </tr>
     {% for soldier in soldier_list %}
     <tr>
@@ -28,12 +26,6 @@
         <td>{{ soldier.bio }}</td>
         <td>{{ soldier.password }}</td>
         <td>{{ soldier.total_days }}</td>
-        <td>
-            <a href="{{ soldier.id }}/delete">삭제</a>
-        </td>
-        <td>
-            <a href="{{ soldier.id }}/update">수정</a>
-        </td>
     </tr>
     {% endfor %}
 </table>

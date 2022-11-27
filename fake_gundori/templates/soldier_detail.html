@@ -34,6 +34,9 @@
         </td>
     </tr>
 </table>
+<div class="progress" style="height: 30px;">
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span id="output2"></span></div>
+</div>
 <div>
     <a href="{% url 'soldier-list' %}">목록으로</a>
     
@@ -54,7 +57,13 @@
 
             percent = serve_timedelta.total_seconds() / total_timedelta.total_seconds() * 100
 
+            if percent > 100:
+                percent = 100
+            elif (-1) * percent > 0:
+                percent = 0
+
             Element("output").write("{0} %".format(round(percent, 7)))
+            Element("output2").write("{0} %".format(round(percent, 7)))
 
     pyscript.run_until_complete(show_percent())
     </py-script>

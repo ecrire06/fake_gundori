@@ -19,6 +19,14 @@ class SoldierDetailView(generic.DetailView):
     model = Soldier
     template_name = 'soldier_detail.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(SoldierDetailView, self).get_context_data(*args, **kwargs)
+        myobject = self.object
+        
+        context['pct'] = myobject.percent
+        return context
+        
+
 # Generic Edit View
 class SoldierCreateView(generic.CreateView):
     form_class = SoldierForm

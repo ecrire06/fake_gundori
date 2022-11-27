@@ -67,4 +67,4 @@ class Soldier(models.Model):
             percent = 100
         if percent < 0:
             percent = 0
-        return "{0} %".format(round(percent, 8))
+        return round(percent, 8)

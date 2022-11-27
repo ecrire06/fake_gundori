@@ -6,6 +6,7 @@
 <table border="1">
     <tr>
         <td>이름</td>
+        <td>퍼센트</td>
         <td>입대일</td>
         <td>병역 종류</td>
         <td>전역일</td>
@@ -19,6 +20,7 @@
         <td>
             <a href="{{ soldier.get_absolute_url }}">{{ soldier.name }}</a>
         </td>
+        <td>{{ soldier.percent }}</td>
         <td>{{ soldier.enter_date|date:"Y-m-d" }}</td>
         <td>{{ soldier.army_choice }}</td>
         <td>{{ soldier.end_date|date:"Y-m-d" }}</td>

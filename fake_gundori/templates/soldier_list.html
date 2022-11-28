@@ -10,6 +10,24 @@
     <h2>짭 군돌이</h2>
     <h3>군인 목록</h3>
     {% if soldier_list %}
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        {% for soldier in soldier_list %}
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" aria-expanded="false" aria-controls="collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}">
+              {{ soldier.name }}
+            </button>
+          </h2>
+          <div id="collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" class="accordion-collapse collapse" aria-labelledby="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              {{ soldier.bio }}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
     <table border="1">
         <tr>
             <td>이름</td>

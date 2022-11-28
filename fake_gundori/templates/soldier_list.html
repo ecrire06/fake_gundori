@@ -1,77 +1,114 @@
 {% extends "base_generic.html" %}
-{% block content %}
-<h2>짭 군돌이</h2>
-<h3>군인 목록</h3>
-{% if soldier_list %}
-<table border="1">
-    <tr>
-        <td>이름</td>
-        <td>퍼센트</td>
-        <td>입대일</td>
-        <td>병역 종류</td>
-        <td>전역일</td>
-        <td>남은 복무기간</td>
-        <td>한줄소개</td>
-        <td>총 복무기간</td>
-    </tr>
-    {% for soldier in soldier_list %}
-    <tr>
-        <td>
-            <a href="{{ soldier.get_absolute_url }}">{{ soldier.name }}</a>
-        </td>
-        <td>{{ soldier.percent }} %</td>
-        <td>{{ soldier.enter_date|date:"Y-m-d" }}</td>
-        <td>{{ soldier.army_choice }}</td>
-        <td>{{ soldier.end_date|date:"Y-m-d" }}</td>
-        <td>{{ soldier.remain_days }}</td>
-        <td>{{ soldier.bio }}</td>
-        <td>{{ soldier.total_days }}</td>
-    </tr>
-    {% endfor %}
-</table>
-{% else %}
-<p>군인을 추가해주세요.</p>
-{% endif %}
-<div>
-    <a href="add">군인 추가하기</a>
-</div>
 
-<!-- bootstrap style을 적용한다. -->
-{% if is_paginated %}
-<nav aria-label="Page navigation">
-<ul class="pagination">
-    {% if page_obj.has_previous %}
-    <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
-    </li>
+{% block title %}
+<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+<script defer src="https://pyscript.net/latest/pyscript.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container themed-container text-center">
+    <h2>짭 군돌이</h2>
+    <h3>군인 목록</h3>
+    {% if soldier_list %}
+    <table border="1">
+        <tr>
+            <td>이름</td>
+            <td>퍼센트</td>
+            <td>입대일</td>
+            <td>병역 종류</td>
+            <td>전역일</td>
+            <td>남은 복무기간</td>
+            <td>한줄소개</td>
+            <td>총 복무기간</td>
+            <td>pyscript</td>
+        </tr>
+        {% for soldier in soldier_list %}
+        <tr>
+            <td>
+                <a href="{{ soldier.get_absolute_url }}">{{ soldier.name }}</a>
+            </td>
+            <td>{{ soldier.percent }} %</td>
+            <td>{{ soldier.enter_date|date:"Y-m-d" }}</td>
+            <td>{{ soldier.army_choice }}</td>
+            <td>{{ soldier.end_date|date:"Y-m-d" }}</td>
+            <td>{{ soldier.remain_days }}</td>
+            <td>{{ soldier.bio }}</td>
+            <td>{{ soldier.total_days }}</td>
+            <td id="output_{{ soldier.id }}">pyscript</td>
+        </tr>
+
+        <py-script>
+          import asyncio
+          from datetime import datetime
+      
+          async def show_percent():
+              while True:
+                  await asyncio.sleep(0.01)
+                  enter_date = "{{ soldier.enter_date|date:"Y-m-d" }}"
+                  enter_date_obj = datetime.strptime(enter_date, "%Y-%m-%d")
+                  end_date = "{{ soldier.end_date|date:"Y-m-d" }}"
+                  end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
+                  
+                  serve_timedelta = (datetime.now() - enter_date_obj)
+                  total_timedelta = (end_date_obj - enter_date_obj)
+      
+                  percent = serve_timedelta.total_seconds() / total_timedelta.total_seconds() * 100
+      
+                  if percent > 100:
+                      percent = 100
+                  elif (-1) * percent > 0:
+                      percent = 0
+      
+                  Element("output_{{ soldier.id }}").write("{0} %".format(round(percent, 7)))
+      
+          pyscript.run_until_complete(show_percent())
+        </py-script>
+        {% endfor %}
+    </table>
     {% else %}
-    <li class="page-item disabled">
-        <span class="page-link">&laquo;</span>
-    </li>
+    <p>군인을 추가해주세요.</p>
     {% endif %}
-    {% for i in paginator.page_range %}
-    {% if page_obj.number == i %}
-    <li class="page-item active">
-        <span class="page-link">{{ i }}
-            <span class="sr-only">(current)</span>
-        </span>
-    </li>
-    {% else %}
-    <li class="page-item">
-        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-    </li>
+    <div>
+        <a href="add">군인 추가하기</a>
+    </div>
+    
+    <!-- bootstrap style을 적용한다. -->
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">&laquo;</span>
+        </li>
+        {% endif %}
+        {% for i in paginator.page_range %}
+        {% if page_obj.number == i %}
+        <li class="page-item active">
+            <span class="page-link">{{ i }}
+                <span class="sr-only">(current)</span>
+            </span>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">&raquo;</span>
+        </li>
+        {% endif %}
+    </ul>
+    </nav>
     {% endif %}
-    {% endfor %}
-    {% if page_obj.has_next %}
-    <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
-    </li>
-    {% else %}
-    <li class="page-item disabled">
-        <span class="page-link">&raquo;</span>
-    </li>
-    {% endif %}
-</ul>
-</nav>
-{% endif %}
+</div>
 {% endblock %}

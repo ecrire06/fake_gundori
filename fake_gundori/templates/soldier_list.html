@@ -7,8 +7,7 @@
 
 {% block content %}
 <div class="container themed-container text-center">
-    <h2>짭 군돌이</h2>
-    <h3>군인 목록</h3>
+    <h2 class="py-3">짭 군돌이</h2>
     {% if soldier_list %}
     <div class="accordion" id="accordionExample">
       <div class="accordion-item">
@@ -16,73 +15,73 @@
         <div class="accordion-item">
           <h2 class="accordion-header" id="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" aria-expanded="false" aria-controls="collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}">
-              {{ soldier.name }}
+              <h5 class="fs-5 fw-bold"><i class="fa-solid fa-align-justify"></i> {{ soldier.name }} <span class="fs-6 fw-light">| 입대: {{ soldier.enter_date|date:"Y-m-d" }}</span></h5>
             </button>
           </h2>
           <div id="collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" class="accordion-collapse collapse" aria-labelledby="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              {{ soldier.bio }}
+                <div class="text-start">
+                    <div class="text-end"><span class="fw-bold">전역: </span>{{ soldier.end_date|date:"Y년 m월 d일" }}</div>
+                    <div class="progress text-center" style="height: 30px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger bg-opacity-75" role="progressbar" style="width: {{ soldier.percent }}%;" aria-valuenow="{{ soldier.percent }}" aria-valuemin="0" aria-valuemax="100"><span id="output_{{ soldier.id }}"></span></div>
+                    </div>
+                    <div class="alert alert-danger my-4" role="alert">
+                        <span class="fw-bold">한줄소개: </span>{{ soldier.bio }}
+                    </div>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">병역 종류</th>
+                            <th scope="col">전체 복무일</th>
+                            <th scope="col">현재 복무일</th>
+                            <th scope="col">남은 복무일</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{ soldier.army_choice }}</td>
+                            <td>{{ soldier.total_days }}</td>
+                            <td>{{ soldier.days_until_now }}</td>
+                            <td>{{ soldier.remain_days}}</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                    <div><a href="{{ soldier.get_absolute_url }}">수정하기</a></div>
+                </div>
             </div>
           </div>
         </div>
+        
+                <py-script>
+                  import asyncio
+                  from datetime import datetime
+              
+                  async def show_percent():
+                      while True:
+                          await asyncio.sleep(0.01)
+                          enter_date = "{{ soldier.enter_date|date:"Y-m-d" }}"
+                          enter_date_obj = datetime.strptime(enter_date, "%Y-%m-%d")
+                          end_date = "{{ soldier.end_date|date:"Y-m-d" }}"
+                          end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
+                          
+                          serve_timedelta = (datetime.now() - enter_date_obj)
+                          total_timedelta = (end_date_obj - enter_date_obj)
+              
+                          percent = serve_timedelta.total_seconds() / total_timedelta.total_seconds() * 100
+              
+                          if percent > 100:
+                              percent = 100
+                          elif (-1) * percent > 0:
+                              percent = 0
+              
+                          Element("output_{{ soldier.id }}").write("{0} %".format(round(percent, 7)))
+              
+                  pyscript.run_until_complete(show_percent())
+                </py-script>
         {% endfor %}
       </div>
     </div>
-    <table border="1">
-        <tr>
-            <td>이름</td>
-            <td>퍼센트</td>
-            <td>입대일</td>
-            <td>병역 종류</td>
-            <td>전역일</td>
-            <td>남은 복무기간</td>
-            <td>한줄소개</td>
-            <td>총 복무기간</td>
-            <td>pyscript</td>
-        </tr>
-        {% for soldier in soldier_list %}
-        <tr>
-            <td>
-                <a href="{{ soldier.get_absolute_url }}">{{ soldier.name }}</a>
-            </td>
-            <td>{{ soldier.percent }} %</td>
-            <td>{{ soldier.enter_date|date:"Y-m-d" }}</td>
-            <td>{{ soldier.army_choice }}</td>
-            <td>{{ soldier.end_date|date:"Y-m-d" }}</td>
-            <td>{{ soldier.remain_days }}</td>
-            <td>{{ soldier.bio }}</td>
-            <td>{{ soldier.total_days }}</td>
-            <td id="output_{{ soldier.id }}">pyscript</td>
-        </tr>
-
-        <py-script>
-          import asyncio
-          from datetime import datetime
-      
-          async def show_percent():
-              while True:
-                  await asyncio.sleep(0.01)
-                  enter_date = "{{ soldier.enter_date|date:"Y-m-d" }}"
-                  enter_date_obj = datetime.strptime(enter_date, "%Y-%m-%d")
-                  end_date = "{{ soldier.end_date|date:"Y-m-d" }}"
-                  end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
-                  
-                  serve_timedelta = (datetime.now() - enter_date_obj)
-                  total_timedelta = (end_date_obj - enter_date_obj)
-      
-                  percent = serve_timedelta.total_seconds() / total_timedelta.total_seconds() * 100
-      
-                  if percent > 100:
-                      percent = 100
-                  elif (-1) * percent > 0:
-                      percent = 0
-      
-                  Element("output_{{ soldier.id }}").write("{0} %".format(round(percent, 7)))
-      
-          pyscript.run_until_complete(show_percent())
-        </py-script>
-        {% endfor %}
-    </table>
+    
     {% else %}
     <p>군인을 추가해주세요.</p>
     {% endif %}

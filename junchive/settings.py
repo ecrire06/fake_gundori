@@ -27,12 +27,12 @@ SECRET_KEY = 'django-insecure-k!+6$!-&u&wvu3dlo1#-h_)$3r^a(bo^u1zq2b20z5^pxa85xm
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '00df8ebcdd06cd.lhr.life',
+    'd39247feb595f6.lhr.life',
     'ecrire06.up.railway.app',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://00df8ebcdd06cd.lhr.life',
+    'https://d39247feb595f6.lhr.life',
     'https://ecrire06.up.railway.app',
 ]
 
@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'fake_gundori.apps.FakeGundoriConfig',
+    'fontawesomefree',
+    'dateutil',
 ]
 
 MIDDLEWARE = [

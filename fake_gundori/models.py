@@ -61,6 +61,13 @@ class Soldier(models.Model):
         enter_date = self.enter_date
         return (end_date - enter_date).days
 
+    # 현재 복무일수
+    @property
+    def days_until_now(self):
+        total_days = self.total_days
+        remain_days = self.remain_days
+        return total_days - remain_days
+
     # 복무 퍼센트
     @property
     def percent(self):

@@ -15,7 +15,19 @@
         <div class="accordion-item">
           <h2 class="accordion-header" id="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" aria-expanded="false" aria-controls="collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}">
-              <h5 class="fs-5 fw-bold"><i class="fa-solid fa-align-justify"></i> {{ soldier.name }} <span class="fs-6 fw-light">| 입대: {{ soldier.enter_date|date:"Y-m-d" }}</span></h5>
+              <h5 class="fs-5 fw-bold">
+                {% if soldier.military_rank == '병장' %}
+                  <i class="fa-solid fa-align-justify"></i>
+                {% elif soldier.military_rank == '상병' %}
+                  <i class="fa-solid fa-bars"></i>
+                {% elif soldier.military_rank == '일병' %}
+                  <i class="fa-solid fa-grip-lines"></i>
+                {% elif soldier.military_rank == '이병' %}
+                  <i class="fa-solid fa-minus"></i>
+                {% else %}
+                  <i class="fa-solid fa-align-justify"></i> 
+                {% endif %}
+                {{ soldier.military_rank }} {{ soldier.name }} <span class="fs-6 fw-light">| 입대: {{ soldier.enter_date|date:"Y-m-d" }}</span></h5>
             </button>
           </h2>
           <div id="collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" class="accordion-collapse collapse" aria-labelledby="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" data-bs-parent="#accordionExample">

@@ -45,6 +45,24 @@ class Soldier(models.Model):
             end_date = enter_date + relativedelta(months=18) + relativedelta(days=-1)
         return end_date
 
+    # 계급
+    @property
+    def military_rank(self):
+        enter_date = self.enter_date 
+        g2 = (enter_date + relativedelta(months=3)).replace(day=1)
+        g3 = (g2 + relativedelta(months=6)).replace(day=1)
+        g4 = (g3 + relativedelta(months=6)).replace(day=1)
+        now = timezone.now()
+        if now < g2:
+            military_rank = '이병'
+        elif now < g3:
+            military_rank = '일병'
+        elif now < g4:
+            military_rank = '상병'
+        else:
+            military_rank = '병장'
+        return military_rank
+
     # 남은 복무일수
     @property
     def remain_days(self):

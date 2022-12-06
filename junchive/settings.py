@@ -27,12 +27,12 @@ SECRET_KEY = 'django-insecure-k!+6$!-&u&wvu3dlo1#-h_)$3r^a(bo^u1zq2b20z5^pxa85xm
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '94132cfa0ff246.lhr.life',
+    'ef71a52cf084cf.lhr.life',
     'ecrire06.up.railway.app',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://94132cfa0ff246.lhr.life',
+    'https://ef71a52cf084cf.lhr.life',
     'https://ecrire06.up.railway.app',
 ]
 

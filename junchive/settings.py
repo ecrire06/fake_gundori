@@ -27,12 +27,12 @@ SECRET_KEY = 'django-insecure-k!+6$!-&u&wvu3dlo1#-h_)$3r^a(bo^u1zq2b20z5^pxa85xm
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '4a55ce9d4227eb.lhr.life',
+    '94132cfa0ff246.lhr.life',
     'ecrire06.up.railway.app',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://4a55ce9d4227eb.lhr.life',
+    'https://94132cfa0ff246.lhr.life',
     'https://ecrire06.up.railway.app',
 ]
 
@@ -49,7 +49,12 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'dateutil',
     'bootstrap5',
+    'sass_processor',
 ]
+SASS_PROCESSOR_ENABLED = True
+SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')
+SASS_OUTPUT_STYLE = 'compact'
+SASS_PRECISION = 8
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -67,7 +72,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'tempaltes'),
+            os.path.join(BASE_DIR, 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -130,6 +135,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_FINDERS  = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

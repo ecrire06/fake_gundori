@@ -18,7 +18,7 @@
         <div class="col">
         </div>
         <div class="col">
-          <a href="add" class="text-danger">군인 추가하기</a>
+          <a href="add" class="">군인 추가하기</a>
         </div>
       <div>
     </div>
@@ -51,7 +51,7 @@
               <div class="container text-center">
                 <div class="row">
                   <div class="col">
-                    <div class="text-start"><a class="text-danger" href="{{ soldier.get_absolute_url }}">수정하기</a></div>
+                    <div class="text-start"><a class="" href="{{ soldier.get_absolute_url }}">수정하기</a></div>
                   </div>
                   <div class="col">
                   </div>
@@ -60,9 +60,9 @@
                   </div>
                 </div>
                 <div class="progress text-center" style="height: 30px;">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger bg-opacity-75" role="progressbar" style="width: {{ soldier.percent }}%;" aria-valuenow="{{ soldier.percent }}" aria-valuemin="0" aria-valuemax="100"><span id="output_{{ soldier.id }}"></span></div>
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-opacity-75" role="progressbar" style="width: {{ soldier.percent }}%;" aria-valuenow="{{ soldier.percent }}" aria-valuemin="0" aria-valuemax="100"><span id="output_{{ soldier.id }}" class="fw-bold"></span></div>
                 </div>
-                <div class="alert alert-danger my-4 text-start" role="alert">
+                <div class="alert alert-primary my-4 text-start" role="alert">
                     <span class="fw-bold">한줄소개: </span>{{ soldier.bio }}
                 </div>
                 <table class="table">
@@ -79,7 +79,7 @@
                         <td>{{ soldier.army_choice }}</td>
                         <td>{{ soldier.total_days }}</td>
                         <td>{{ soldier.days_until_now }}</td>
-                        <td><i class="fa-solid fa-house-chimney text-danger"></i> D-{{ soldier.remain_days}}</td>
+                        <td><i class="fa-solid fa-house-chimney text-primary"></i> D-{{ soldier.remain_days}}</td>
                       </tr>
                     </tbody>
                 </table>

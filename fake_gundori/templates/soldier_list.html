@@ -54,8 +54,6 @@
                     <div class="text-start"><a class="" href="{{ soldier.get_absolute_url }}">수정하기</a></div>
                   </div>
                   <div class="col">
-                  </div>
-                  <div class="col">
                     <div class="text-end"><span class="fw-bold">전역: </span>{{ soldier.end_date|date:"Y년 m월 d일" }}</div>
                   </div>
                 </div>
@@ -133,7 +131,7 @@
           {% for i in paginator.page_range %}
           {% if page_obj.number == i %}
           <li class="page-item active">
-            <span class="page-link bg-primary">{{ i }}
+            <span class="page-link" style="background-color:palevioletred; border-color:palevioletred">{{ i }}
                   <span class="sr-only">(current)</span>
               </span>
           </li>

@@ -6,153 +6,155 @@
 {% endblock %}
 
 {% block content %}
-<div class="container text-center" style="font-family:Nanum Gothic;">
-  <div>
-    <div class="my-3">
-      <h2 style="font-weight:700;">짭 군돌이</h2>
+<div>
+  <div class="container text-center" style="font-family:Nanum Gothic;">
+    <div>
+      <div class="my-3">
+        <h2 style="font-weight:700;">짭 군돌이</h2>
+      </div>
+      <div class="container text-end">
+        <div class="row mb-2">
+          <div class="col">
+          </div>
+          <div class="col">
+          </div>
+          <div class="col">
+            <a href="add" class="">군인 추가하기</a>
+          </div>
+        <div>
+      </div>
     </div>
-    <div class="container text-end">
-      <div class="row mb-2">
-        <div class="col">
-        </div>
-        <div class="col">
-        </div>
-        <div class="col">
-          <a href="add" class="">군인 추가하기</a>
-        </div>
-      <div>
-    </div>
-  </div>
-  {% if soldier_list %}
-    <div class="accordion" id="accordionExample">
-      {% for soldier in soldier_list %}
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" aria-expanded="false" aria-controls="collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}">
-            <h5 class="fs-5 fw-bold">
-              {% if soldier.military_rank == '병장' %}
-              <i class="fa-solid fa-align-justify"></i>
-              {% elif soldier.military_rank == '상병' %}
-              <i class="fa-solid fa-bars"></i>
-              {% elif soldier.military_rank == '일병' %}
-              <i class="fa-solid fa-grip-lines"></i>
-              {% elif soldier.military_rank == '이병' %}
-              <i class="fa-solid fa-minus"></i>
-              {% else %}
-              <i class="fa-solid fa-align-justify"></i> 
-              {% endif %}
-                {{ soldier.military_rank }} {{ soldier.name }} <span class="fs-6 fw-light">| 입대: {{ soldier.enter_date|date:"Y-m-d" }}</span>
-            </h5>
-          </button>
-        </h2>
-        <div id="collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" class="accordion-collapse collapse" aria-labelledby="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <div class="text-start">
-              <div class="container text-center">
-                <div class="row">
-                  <div class="col">
-                    <div class="text-start"><a class="" href="{{ soldier.get_absolute_url }}">수정하기</a></div>
+    {% if soldier_list %}
+      <div class="accordion mb-4" id="accordionExample">
+        {% for soldier in soldier_list %}
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" aria-expanded="false" aria-controls="collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}">
+              <h5 class="fs-5 fw-bold">
+                {% if soldier.military_rank == '병장' %}
+                <i class="fa-solid fa-align-justify"></i>
+                {% elif soldier.military_rank == '상병' %}
+                <i class="fa-solid fa-bars"></i>
+                {% elif soldier.military_rank == '일병' %}
+                <i class="fa-solid fa-grip-lines"></i>
+                {% elif soldier.military_rank == '이병' %}
+                <i class="fa-solid fa-minus"></i>
+                {% else %}
+                <i class="fa-solid fa-align-justify"></i> 
+                {% endif %}
+                  {{ soldier.military_rank }} {{ soldier.name }} <span class="fs-6 fw-light">| 입대: {{ soldier.enter_date|date:"Y-m-d" }}</span>
+              </h5>
+            </button>
+          </h2>
+          <div id="collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" class="accordion-collapse collapse" aria-labelledby="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="text-start">
+                <div class="container text-center">
+                  <div class="row">
+                    <div class="col">
+                      <div class="text-start"><a class="" href="{{ soldier.get_absolute_url }}">수정하기</a></div>
+                    </div>
+                    <div class="col">
+                      <div class="text-end"><span class="fw-bold">전역: </span>{{ soldier.end_date|date:"Y년 m월 d일" }}</div>
+                    </div>
                   </div>
-                  <div class="col">
-                    <div class="text-end"><span class="fw-bold">전역: </span>{{ soldier.end_date|date:"Y년 m월 d일" }}</div>
+                  <div class="progress text-center" style="height: 30px;">
+                      <div class="progress-bar progress-bar-striped progress-bar-animated bg-opacity-75" role="progressbar" style="width: {{ soldier.percent }}%;" aria-valuenow="{{ soldier.percent }}" aria-valuemin="0" aria-valuemax="100"><span id="output_{{ soldier.id }}" class="fw-bold"></span></div>
                   </div>
+                  <div class="alert alert-primary my-4 text-start" role="alert">
+                      <span class="fw-bold">한줄소개: </span>{{ soldier.bio }}
+                  </div>
+                  <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">병역 종류</th>
+                          <th scope="col">전체 복무일</th>
+                          <th scope="col">현재 복무일</th>
+                          <th scope="col">남은 복무일</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{{ soldier.army_choice }}</td>
+                          <td>{{ soldier.total_days }}</td>
+                          <td>{{ soldier.days_until_now }}</td>
+                          <td><i class="fa-solid fa-house-chimney text-primary"></i> D-{{ soldier.remain_days}}</td>
+                        </tr>
+                      </tbody>
+                  </table>
                 </div>
-                <div class="progress text-center" style="height: 30px;">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-opacity-75" role="progressbar" style="width: {{ soldier.percent }}%;" aria-valuenow="{{ soldier.percent }}" aria-valuemin="0" aria-valuemax="100"><span id="output_{{ soldier.id }}" class="fw-bold"></span></div>
-                </div>
-                <div class="alert alert-primary my-4 text-start" role="alert">
-                    <span class="fw-bold">한줄소개: </span>{{ soldier.bio }}
-                </div>
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">병역 종류</th>
-                        <th scope="col">전체 복무일</th>
-                        <th scope="col">현재 복무일</th>
-                        <th scope="col">남은 복무일</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>{{ soldier.army_choice }}</td>
-                        <td>{{ soldier.total_days }}</td>
-                        <td>{{ soldier.days_until_now }}</td>
-                        <td><i class="fa-solid fa-house-chimney text-primary"></i> D-{{ soldier.remain_days}}</td>
-                      </tr>
-                    </tbody>
-                </table>
               </div>
             </div>
           </div>
+          <py-script>
+            import asyncio
+            from datetime import datetime
+            async def show_percent():
+                while True:
+                    await asyncio.sleep(0.01)
+                    enter_date = "{{ soldier.enter_date|date:"Y-m-d" }}"
+                    enter_date_obj = datetime.strptime(enter_date, "%Y-%m-%d")
+                    end_date = "{{ soldier.end_date|date:"Y-m-d" }}"
+                    end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
+                    
+                    serve_timedelta = (datetime.now() - enter_date_obj)
+                    total_timedelta = (end_date_obj - enter_date_obj)
+                    percent = serve_timedelta.total_seconds() / total_timedelta.total_seconds() * 100
+                    if percent > 100:
+                        percent = 100
+                    elif (-1) * percent > 0:
+                        percent = 0
+                    Element("output_{{ soldier.id }}").write("{0} %".format(round(percent, 7)))
+            pyscript.run_until_complete(show_percent())
+          </py-script>
         </div>
-        <py-script>
-          import asyncio
-          from datetime import datetime
-          async def show_percent():
-              while True:
-                  await asyncio.sleep(0.01)
-                  enter_date = "{{ soldier.enter_date|date:"Y-m-d" }}"
-                  enter_date_obj = datetime.strptime(enter_date, "%Y-%m-%d")
-                  end_date = "{{ soldier.end_date|date:"Y-m-d" }}"
-                  end_date_obj = datetime.strptime(end_date, "%Y-%m-%d")
-                  
-                  serve_timedelta = (datetime.now() - enter_date_obj)
-                  total_timedelta = (end_date_obj - enter_date_obj)
-                  percent = serve_timedelta.total_seconds() / total_timedelta.total_seconds() * 100
-                  if percent > 100:
-                      percent = 100
-                  elif (-1) * percent > 0:
-                      percent = 0
-                  Element("output_{{ soldier.id }}").write("{0} %".format(round(percent, 7)))
-          pyscript.run_until_complete(show_percent())
-        </py-script>
+        {% endfor %}
       </div>
-      {% endfor %}
-    </div>
-  
-  {% else %}
-  <p>군인을 추가해주세요.</p>
-  {% endif %}
+    
+    {% else %}
+    <p>군인을 추가해주세요.</p>
+    {% endif %}
 
-  <!-- bootstrap style을 적용한다. -->
-  {% if is_paginated %}
-    <div class="my-3">      
-      <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-          {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
-          </li>
-          {% else %}
-          <li class="page-item disabled">
-            <span class="page-link">&laquo;</span>
-          </li>
-          {% endif %}
-          {% for i in paginator.page_range %}
-          {% if page_obj.number == i %}
-          <li class="page-item active">
-            <span class="page-link" style="background-color:palevioletred; border-color:palevioletred">{{ i }}
-                  <span class="sr-only">(current)</span>
-              </span>
-          </li>
-          {% else %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-          </li>
-          {% endif %}
-          {% endfor %}
-          {% if page_obj.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
-          </li>
-          {% else %}
-          <li class="page-item disabled">
-            <span class="page-link">&raquo;</span>
-          </li>
-          {% endif %}
-        </ul>
-      </nav>
-    </div>
-  {% endif %}
+    <!-- bootstrap style을 적용한다. -->
+    {% if is_paginated %}
+      <div class="my-3">      
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+              <span class="page-link">&laquo;</span>
+            </li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+            {% if page_obj.number == i %}
+            <li class="page-item active">
+              <span class="page-link" style="background-color:palevioletred; border-color:palevioletred">{{ i }}
+                    <span class="sr-only">(current)</span>
+                </span>
+            </li>
+            {% else %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+              <span class="page-link">&raquo;</span>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}

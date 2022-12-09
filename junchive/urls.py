@@ -23,5 +23,5 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('fake_gundori/', include('fake_gundori.urls')),
-    path('', RedirectView.as_view(url='/fake_gundori/', permanent=True)), # 127.0.0.1:8000을 127.0.0.1:8000/facke_gundori/로 redirect
+    path('', RedirectView.as_view(url='/fake_gundori/soldier', permanent=True)), # 127.0.0.1:8000을 127.0.0.1:8000/facke_gundori/로 redirect
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # CSS, JavaScript, Image와 같은 Static Files 제공 가능하게 함

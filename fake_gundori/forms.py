@@ -16,8 +16,26 @@ class SoldierForm(forms.ModelForm):
                     'password',
                 ]
         widgets = {
-            'enter_date' : DateInput(),
-            'password' : forms.PasswordInput(),
+            'name' : forms.TextInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'enter_date' : DateInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'bio' : forms.TextInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'password' : forms.PasswordInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
         }
 
     def clean(self):

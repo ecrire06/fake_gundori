@@ -2,15 +2,24 @@
 
 {% block content %}
 
-<h1>
-    군인 추가하기
-</h1>
+<div>
+    <div class="container text-center" style="font-family:Nanum Gothic;">
+        <div>
+            <div class="my-3">
+                <h2 style="font-weight:700;">짭 군돌이</h2>
+                <p>아래 항목을 작성해주세요.</p>
+            </div>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="제출">
+            <button type="button" onclick="{{ soldier.id }}/delete">삭제</button>
+        </form>
+    </div>
+</div>
 
-<form method="POST">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <input type="submit" value="제출"></form>
 
 {% endblock %}

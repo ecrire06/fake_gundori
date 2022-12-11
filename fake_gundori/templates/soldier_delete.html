@@ -1,11 +1,29 @@
-{% extends 'base_generic.html' %}
+{% extends "base_generic.html" %}
 
 
 {% block content %}
 
-<form method="post">{% csrf_token %} 
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm">
-</form>
+<div class="col-lg-8 mx-auto p-4 py-md-5">
+    <div class="container text-center" style="font-family:Nanum Gothic;">
+        <header>
+            <div class="my-3">
+                <h2 style="font-weight:700;">군인 수정하기</h2>
+                <p>아래 항목을 작성해주세요.</p>
+            </div>
+        </header>
+        <main>
+            <div style="background-color:white;">
+                <form method="POST">
+                    {% csrf_token %}
+                    <p>Are you sure you want to delete "{{ object }}"?</p>
+                    <table>
+                        {{ form.as_table }}
+                    </table>
+                    <input type="submit" value="제출">
+                </form>
+            </div>
+        </main
+    </div>
+</div>
 
 {% endblock %}

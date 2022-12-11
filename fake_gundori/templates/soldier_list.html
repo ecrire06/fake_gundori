@@ -17,18 +17,18 @@
           <div class="col">
           </div>
           <div class="col">
-            <a href="add" class="">군인 추가하기</a>
+            <button type="button" class="btn btn-outline-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"  onclick="location.href='add'">군인 추가하기</button>
           </div>
         <div>
       </div>
     </div>
     {% if soldier_list %}
-      <div class="accordion mb-4" id="accordionExample">
+      <div class="accordion mb-4 shadow" id="accordionExample">
         {% for soldier in soldier_list %}
         <div class="accordion-item">
           <h2 class="accordion-header" id="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}" aria-expanded="false" aria-controls="collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' 'Six' 'Seven' 'Eight' 'Nine' 'Ten' %}">
-              <h5 class="fs-6 fw-bold">
+              <h5 class="fw-bold" style="font-size:18px;">
                 {% if soldier.military_rank == '병장' %}
                 <i class="fa-solid fa-align-justify"></i>
                 {% elif soldier.military_rank == '상병' %}
@@ -40,7 +40,7 @@
                 {% else %}
                 <i class="fa-solid fa-align-justify"></i>
                 {% endif %}
-                  {{ soldier.military_rank }} {{ soldier.name }} <span class="fs-7 fw-light">|입대 {{ soldier.enter_date|date:"Y.m.d" }}</span>
+                  {{ soldier.military_rank }} {{ soldier.name }} <span class="fs-7 fw-light" style="font-size: 12px; color: gray;">|입대 {{ soldier.enter_date|date:"Y.m.d" }}</span>
               </h5>
             </button>
           </h2>
@@ -48,23 +48,23 @@
             <div class="accordion-body">
               <div class="text-start">
                 <div class="container text-center">
-                  <div class="row">
-                    <div class="col">
-                      <div class="text-start"><a class="" href="{{ soldier.get_absolute_url }}/update">수정하기</a></div>
+                  <div class="row align-middle">
+                    <div class="col text-start">
+                        <button type="button" class="btn btn-outline-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"  onclick="location.href='{{ soldier.get_absolute_url }}/update'">수정하기</button>
                     </div>
-                    <div class="col">
-                      <div class="text-end"><span class="fw-bold">전역 </span>{{ soldier.end_date|date:"Y.m.d" }}</div>
+                    <div class="col align-middle">
+                      <div class="text-end align-middle" style="font-size: 14px; color: palevioletred"><span class="fw-bold">전역 </span>{{ soldier.end_date|date:"Y.m.d" }}</div>
                     </div>
                   </div>
-                  <div class="progress text-center" style="height: 30px;">
+                  <div class="progress text-center my-2" style="height: 30px;">
                       <div class="progress-bar progress-bar-striped progress-bar-animated bg-opacity-75" role="progressbar" style="width: {{ soldier.percent }}%;" aria-valuenow="{{ soldier.percent }}" aria-valuemin="0" aria-valuemax="100"><span id="output_{{ soldier.id }}" class="fw-bold"></span></div>
                   </div>
-                  <div class="alert alert-primary my-4 text-start" role="alert">
+                  <div class="alert alert-primary my-4 text-start" role="alert" style="font-size:14px;">
                       <span class="fw-bold">한줄소개: </span>{{ soldier.bio }}
                   </div>
                   <table class="table">
                       <thead>
-                        <tr>
+                        <tr style="font-size:14px;">
                           <th scope="col-2">병역 종류</th>
                           <th scope="col-3">전체 복무</th>
                           <th scope="col-3">지금 까지</th>
@@ -72,11 +72,11 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>{{ soldier.army_choice }}</td>
-                          <td>{{ soldier.total_days }}일</td>
-                          <td>{{ soldier.days_until_now }}일</td>
-                          <td><i class="fa-solid fa-house-chimney text-primary"></i> D-{{ soldier.remain_days}}</td>
+                        <tr style="font-size:12px;">
+                          <td class="align-middle">{{ soldier.army_choice }}</td>
+                          <td class="align-middle">{{ soldier.total_days }}일</td>
+                          <td class="align-middle">{{ soldier.days_until_now }}일</td>
+                          <td><i class="fa-solid fa-house-chimney text-primary"></i><br>D-{{ soldier.remain_days}}</td>
                         </tr>
                       </tbody>
                   </table>

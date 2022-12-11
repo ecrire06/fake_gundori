@@ -19,7 +19,7 @@
                         {{ form.as_table }}
                     </table>
                     <input type="submit" value="제출">
-                    <button type="button" onclick="location.href='/fake_gundori/soldier/{{ soldier.id }}/delete'">삭제</button>
+                    <button type="button" onclick="location.href='{{ soldier.get_absolute_url }}/delete'">삭제</button>
                 </form>
             </div>
         </main>

@@ -2,11 +2,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-
-# date 관련
-from datetime import datetime
 from dateutil.relativedelta import relativedelta
-import time
 
 ARMY = '육군'
 NAVY = '해군'
@@ -17,7 +13,7 @@ ARMY_CHOICE = ((ARMY, '육군'), (NAVY, '해군'), (AIR, '공군'), (MARINE, '�
 
 class Soldier(models.Model):
     name = models.CharField(max_length=20)
-    password = models.CharField(max_length=20, default="password")
+    password = models.CharField(max_length=20)
     enter_date = models.DateTimeField()
     army_choice = models.CharField(choices=ARMY_CHOICE, max_length=30, null=True)
     bio = models.CharField(max_length=200, null=True, blank=True, default="한줄소개")
@@ -48,7 +44,7 @@ class Soldier(models.Model):
     # 계급
     @property
     def military_rank(self):
-        enter_date = self.enter_date 
+        enter_date = self.enter_date
         g2 = (enter_date + relativedelta(months=3)).replace(day=1)
         g3 = (g2 + relativedelta(months=6)).replace(day=1)
         g4 = (g3 + relativedelta(months=6)).replace(day=1)
@@ -71,7 +67,7 @@ class Soldier(models.Model):
         if remain_days < 0:
             remain_days = 0
         return remain_days
-    
+
     # 총 복무일수
     @property
     def total_days(self):

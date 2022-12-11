@@ -10,7 +10,7 @@ from .models import Soldier
 class SoldierListView(generic.ListView):
     context_object_name = 'soldier_list'
     template_name = 'soldier_list.html'
-    paginate_by = 10
+    paginate_by = 8
 
     def get_queryset(self):
         return Soldier.objects.all().order_by('enter_date')
@@ -22,10 +22,10 @@ class SoldierDetailView(generic.DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(SoldierDetailView, self).get_context_data(*args, **kwargs)
         myobject = self.object
-        
+
         context['pct'] = myobject.percent
         return context
-        
+
 
 # Generic Edit View
 class SoldierCreateView(generic.CreateView):

@@ -9,11 +9,7 @@ from .models import Soldier
 class SoldierListView(generic.ListView):
     context_object_name = 'soldier_list'
     template_name = 'soldier_list.html'
-<<<<<<< HEAD
     paginate_by = 7
-=======
-    paginate_by = 8
->>>>>>> 9e42a5ce25814fde5f7f83039e769c726b454bbb
 
     def get_queryset(self):
         return Soldier.objects.all().order_by('enter_date')
@@ -44,6 +40,5 @@ class SoldierUpdateView(generic.UpdateView):
 
 class SoldierDeleteView(generic.DeleteView):
     model = Soldier
-    form_class = SoldierDeleteForm
     template_name = 'soldier_delete.html'
     success_url = reverse_lazy('soldier-list')

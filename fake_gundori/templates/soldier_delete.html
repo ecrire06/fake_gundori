@@ -7,19 +7,21 @@
     <div class="container text-center" style="font-family:Nanum Gothic;">
         <header>
             <div class="my-3">
-                <h2 style="font-weight:700;">군인 수정하기</h2>
-                <p>아래 항목을 작성해주세요.</p>
+                <p class="fs-2 fw-bold"><a class="text-decoration-none" href="/">짭 군돌이</a></p>
             </div>
         </header>
         <main>
-            <div style="background-color:white;">
+            <div class="py-2 shadow rounded bg-white">
                 <form method="POST">
                     {% csrf_token %}
-                    <p>Are you sure you want to delete "{{ object }}"?</p>
-                    <table>
+                    <p class="my-3 fs-5 fw-normal">정말 "{{ object }}"를 삭제하시겠습니까?</p>
+                    <table class="my-3">
                         {{ form.as_table }}
                     </table>
-                    <input type="submit" value="제출">
+                    <div class="my-3">
+                        <input type="submit" class="btn btn-outline-primary btn-sm mx-3" value="제출">
+                        <button type="button" class="btn btn-outline-primary btn-sm mx-3" onclick="location.href='/'">취소</button>
+                    </div>
                 </form>
             </div>
         </main

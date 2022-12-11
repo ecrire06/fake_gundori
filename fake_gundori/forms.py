@@ -5,7 +5,7 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 class SoldierCreateForm(forms.ModelForm):
-    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}), label='비밀번호 확인')
     class Meta:
         model = Soldier
         fields = [
@@ -50,7 +50,7 @@ class SoldierCreateForm(forms.ModelForm):
 
         if password != confirm_password:
             raise forms.ValidationError(
-                "비밀번호와 불일치합니다."
+                "비밀번호가 불일치합니다."
             )
 
 class SoldierUpdateForm(forms.ModelForm):
@@ -99,7 +99,7 @@ class SoldierUpdateForm(forms.ModelForm):
 
         if password != confirm_password:
             raise forms.ValidationError(
-                "비밀번호와 불일치합니다."
+                "비밀번호가 불일치합니다."
             )
 
 class SoldierDeleteForm(forms.ModelForm):
@@ -124,5 +124,5 @@ class SoldierDeleteForm(forms.ModelForm):
 
         if password != confirm_password:
             raise forms.ValidationError(
-                f"{confirm_password}비밀번호와 불일치합니다."
+                "비밀번호가 불일치합니다."
             )

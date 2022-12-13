@@ -122,6 +122,7 @@ class SoldierDeleteForm(forms.ModelForm):
         # get password from model instance
         confirm_password = self.instance.password
 
+
         if password != confirm_password:
             raise forms.ValidationError(
                 "비밀번호가 불일치합니다."

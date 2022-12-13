@@ -13,7 +13,7 @@ ARMY_CHOICE = ((ARMY, '육군'), (NAVY, '해군'), (AIR, '공군'), (MARINE, '�
 
 class Soldier(models.Model):
     name = models.CharField(max_length=20, verbose_name='이름')
-    password = models.CharField(max_length=20, verbose_name='비밀번호')
+    password = models.CharField(max_length=20, verbose_name='비밀번호', default="password")
     enter_date = models.DateTimeField(verbose_name='입대일')
     army_choice = models.CharField(choices=ARMY_CHOICE, max_length=30, null=True, verbose_name='복무선택')
     bio = models.CharField(max_length=200, null=True, blank=True, verbose_name='한줄소개')

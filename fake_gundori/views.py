@@ -40,5 +40,6 @@ class SoldierUpdateView(generic.UpdateView):
 
 class SoldierDeleteView(generic.DeleteView):
     model = Soldier
+    form_class = SoldierDeleteForm
     template_name = 'soldier_delete.html'
     success_url = reverse_lazy('soldier-list')

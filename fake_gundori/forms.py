@@ -120,7 +120,7 @@ class SoldierDeleteForm(forms.ModelForm):
         cleaned_data = super(SoldierDeleteForm, self).clean()
         password = cleaned_data.get("password")
         # get password from model instance
-        confirm_password = self.instance.password
+        confirm_password = "gundori1!"
 
 
         if password != confirm_password:

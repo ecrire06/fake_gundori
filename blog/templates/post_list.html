@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    {% for post in post_list %}
+        {{ post.title }}
+        {{ post.pub_date }}
+        {{ post.body }}
+    {% endfor %}
+{% endblock %}

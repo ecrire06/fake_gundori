@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'dateutil',
     'bootstrap5',
     'sass_processor',
+    'blog',
+    'homepage',
 ]
 SASS_PROCESSOR_ENABLED = True
 SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')

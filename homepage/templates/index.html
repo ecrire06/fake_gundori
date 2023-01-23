@@ -1,4 +1,124 @@
-<p>Hello!</p>
+{% extends "base.html" %}
 
-<a href="/fake_gundori">짭 군돌이</a>
-<a href="/blog">블로그</a>
+{% block title %}
+<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+<script defer src="https://pyscript.net/latest/pyscript.js"></script>
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<div class="container-sm bd-gutter mt-3 my-md-4 bd-layout">
+    <div class="bd-content ps-lg-2 py-3 my-3 mx-4">
+        <div class="body">
+            <h2>Welcome to <span class="badge rounded-pill bg-warning text-wrap">JUN</span>chive</h2>
+            <h5>아래 항목 중에서 선택해주세요.</h5>
+        </div>
+    </div>
+    <div class="bd-content ps-lg-2">
+        <div class="row row-cols-1 row-cols-md-auto g-3 g-lg-4">
+          <div class="col">
+            <div class="card text-bg-light mx-auto" style="width: 18rem;">
+                <div class="card-header">
+                    <h5 class="card-title">짭 군돌이</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">칭구들의 전역일이 궁금하다면 여기로 들어와주세요!</p>
+                    <a href="/fake_gundori" class="btn btn-warning">바로가기</a>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card text-bg-light mx-auto" style="width: 18rem;">
+                <div class="card-header">
+                    <h5 class="card-title">블로그</h5>
+                </div>
+              <div class="card-body">
+                <p class="card-text">여기는 개인 블로그입니다. (아직 공사중 주의)</p>
+                <a href="/blog" class="btn btn-warning">바로가기</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card text-bg-light mx-auto" style="width: 18rem;">
+                <div class="card-header">
+                    <h5 class="card-title">지금 미국 시간은?</h5>
+                </div>
+              <div class="card-body">
+                <p class="card-text">미국에 교환학생 간 bestie를 위한 한국&미국 시계입니다!</p>
+                    <div>
+                        <div>
+                            <p>현재 시각:</p>
+                            <p>한국은 <span class="badge rounded-pill bg-warning text-wrap" id="korea"></span>입니다.</p>
+                            <p>뉴욕은 <span class="badge rounded-pill bg-warning text-wrap" id="newyork"></span>입니다.</p>
+                        </div>
+                        <py-script>
+                            import asyncio
+                            from datetime import datetime, timedelta
+                            async def current_time():
+                                while True:
+                                    await asyncio.sleep(1)
+
+                                    time_utc = datetime.now()
+                                    time_kr = time_utc + timedelta(hours=0)
+                                    time_nw = time_utc + timedelta(hours=-14)
+
+                                    time_now = datetime.now()
+                                    Element("newyork").write("{0}".format(time_nw.strftime("%m월 %d일 %H시 %M분 %S초")))
+                                    Element("korea").write("{0}".format(time_kr.strftime("%m월 %d일 %H시 %M분 %S초")))
+                            pyscript.run_until_complete(current_time())
+                        </py-script>
+                    </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card text-bg-light mx-auto" style="width: 18rem;">
+                <div class="card-header">
+                    <h5 class="card-title">What's More?</h5>
+                </div>
+              <div class="card-body">
+                <p class="card-text">개발중입니다. 조금만 기다려주세요!</p>
+                <a href="#" class="btn btn-warning">바로가기</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

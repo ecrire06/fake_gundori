@@ -25,5 +25,5 @@ urlpatterns = [
     path('fake_gundori/', include('fake_gundori.urls')),
     path('blog/', include('blog.urls')),
     path('home/', include('homepage.urls')),
-    path('', RedirectView.as_view(url='/fake_gundori/soldier', permanent=True)),
+    path('', RedirectView.as_view(url='/home', permanent=True)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # CSS, JavaScript, Image와 같은 Static Files 제공 가능하게 함

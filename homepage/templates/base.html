@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <link href="{% static 'fontawesomefree/css/all.css' %}" rel="stylesheet" type="text/css">
+
+    <style>
+        @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+    </style>
+
+    {% block title %}{% endblock %}
+</head>
+
+<body style="background-color: #ffffff;">
+    {% block content %}{% endblock %}
+</body>
+
+</html>

@@ -12,10 +12,6 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
 
-    {% load sass_tags %}
-
-    <link href="{% sass_src 'custom.scss' %}" rel="stylesheet" type="text/css" />
-
     <link href="{% static 'fontawesomefree/css/all.css' %}" rel="stylesheet" type="text/css">
 
     <style>
@@ -25,7 +21,7 @@
     {% block title %}{% endblock %}
 </head>
 
-<body style="background-color: #ffeff1;">
+<body>
     {% block content %}{% endblock %}
 </body>
 

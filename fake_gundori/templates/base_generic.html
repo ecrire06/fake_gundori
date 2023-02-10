@@ -11,9 +11,9 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-    
+
     {% load sass_tags %}
-    
+
     <link href="{% sass_src 'custom.scss' %}" rel="stylesheet" type="text/css">
 
     <link href="{% static 'fontawesomefree/css/all.css' %}" rel="stylesheet" type="text/css">
@@ -25,7 +25,8 @@
     {% block title %}{% endblock %}
 </head>
 
-<body>
+<body style="font-family:Nanum Gothic;">
+    {% include "header.html" %}
     {% block content %}{% endblock %}
 </body>
 

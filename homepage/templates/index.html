@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_generic.html" %}
 
 {% block title %}
 <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
@@ -7,12 +7,6 @@
 
 {% block content %}
 <div class="container-sm bd-gutter mt-3 my-md-4 bd-layout">
-    <div class="bd-content ps-lg-2 py-3 my-3 mx-4">
-        <div class="body">
-            <h2>Welcome to <span class="badge rounded-pill bg-warning text-wrap">JUN</span>chive</h2>
-            <h5>아래 항목 중에서 선택해주세요.</h5>
-        </div>
-    </div>
     <div class="bd-content ps-lg-2">
         <div class="row row-cols-1 row-cols-md-auto g-3 g-lg-4">
           <div class="col">
@@ -47,8 +41,8 @@
                     <div>
                         <div>
                             <p>현재 시각:</p>
-                            <p>한국은 <span class="badge rounded-pill bg-warning text-wrap" id="korea"></span>입니다.</p>
-                            <p>뉴욕은 <span class="badge rounded-pill bg-warning text-wrap" id="newyork"></span>입니다.</p>
+                            <p>한국은 <span class="badge rounded-pill bg-warning text-wrap" id="korea"></span></p>
+                            <p>뉴욕은 <span class="badge rounded-pill bg-warning text-wrap" id="newyork"></span></p>
                         </div>
                         <py-script>
                             import asyncio
@@ -57,9 +51,9 @@
                                 while True:
                                     await asyncio.sleep(1)
 
-                                    time_utc = datetime.now()
-                                    time_kr = time_utc + timedelta(hours=0)
-                                    time_nw = time_utc + timedelta(hours=-14)
+                                    time_utc = datetime.utcnow()
+                                    time_kr = time_utc + timedelta(hours=9)
+                                    time_nw = time_utc + timedelta(hours=-5)
 
                                     time_now = datetime.now()
                                     Element("newyork").write("{0}".format(time_nw.strftime("%m월 %d일 %H시 %M분 %S초")))
@@ -67,6 +61,18 @@
                             pyscript.run_until_complete(current_time())
                         </py-script>
                     </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card text-bg-light mx-auto" style="width: 18rem;">
+                <div class="card-header">
+                    <h5 class="card-title">환율 정보</h5>
+                </div>
+              <div class="card-body">
+                <p class="card-text">기준날짜: {{ last_updated }}</p>
+                <p class="card-text">1엔당 {{ krw2jpy }}원</p>
+                <p class="card-text">1달러당 {{ krw2usd }}원</p>
               </div>
             </div>
           </div>

@@ -4,10 +4,9 @@
 
 
 <div class="col-lg-8 mx-auto p-4 py-md-5">
-    <div class="container text-center" style="font-family:Nanum Gothic;">
+    <div class="container text-center">
         <header>
             <div class="my-3">
-                <p class="fs-2 fw-bold"><a class="text-decoration-none" href="/">짭 군돌이</a></p>
                 <p class="fs-5 fw-normal">아래 항목을 작성해주세요.</p>
             </div>
         </header>
@@ -19,8 +18,8 @@
                         {{ form.as_table }}
                     </table>
                     <div class="my-3">
-                        <input type="submit" class="btn btn-outline-primary btn-sm mx-3" value="제출">
-                        <button type="button" class="btn btn-outline-primary btn-sm mx-3" onclick="location.href='{{ soldier.get_absolute_url }}/delete'">삭제</button>
+                        <input type="submit" class="btn btn-outline-danger btn-sm mx-3" value="제출">
+                        <button type="button" class="btn btn-outline-danger btn-sm mx-3" onclick="location.href='{{ soldier.get_absolute_url }}/delete'">삭제</button>
                     </div>
                 </form>
             </div>
